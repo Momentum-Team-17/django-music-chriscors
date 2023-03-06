@@ -1,0 +1,32 @@
+{% extends 'albums/base.html' %}
+{% block title %}
+  <h1 class="is-size-4 pb-5">{{title}}</h1>
+
+{% endblock title %}
+{% block content %}
+
+  <div class="columns is-flex-wrap-wrap px-4">
+    {% for album in albums %}
+      <div class="column is-one-quarter">
+        <div class="card">
+          <header class="card-header">
+            <h3 class="card-header-title">
+              <a href="{% url "artist_list" album.artist.slug %}">{{album.artist}}</a>
+            </h3>
+            <a class="card-header-icon" aria-label="edit" href="{% url "album_edit" album.pk %}">
+              <span class="icon">
+                <i class="fas fa-pen-to-square" aria-hidden="true"></i>
+              </span>
+            </a>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <a href="{% url "album_details" album.pk %}">{{album}}</a>
+              <h5>{{album.genre}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
